@@ -111,8 +111,14 @@
             padding: 2rem;
             margin-bottom: 2rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border-left: 5px solid var(--buas-orange);
         }
+
+        #functional { border-left: 5px solid #424242; }
+        #reliable { border-left: 5px solid #757575; }
+        #usable { border-left: 5px solid #9E9E9E; }
+        #convenient { border-left: 5px solid #E86A51; }
+        #enjoyable { border-left: 5px solid #C0556B; }
+        #significant { border-left: 5px solid #8B4789; }
 
         .level-header {
             cursor: pointer;
@@ -120,15 +126,22 @@
             align-items: center;
             justify-content: space-between;
             padding: 1rem;
-            background: linear-gradient(to right, var(--buas-light), white);
+            background: var(--buas-light);
             border-radius: 6px;
             margin: -1rem -1rem 1rem -1rem;
             transition: all 0.3s ease;
         }
 
+        #functional .level-header { background: linear-gradient(to right, #424242, #616161); color: white; }
+        #reliable .level-header { background: linear-gradient(to right, #757575, #9E9E9E); color: white; }
+        #usable .level-header { background: linear-gradient(to right, #9E9E9E, #BDBDBD); color: white; }
+        #convenient .level-header { background: linear-gradient(to right, #E86A51, #FF8A65); color: white; }
+        #enjoyable .level-header { background: linear-gradient(to right, #C0556B, #E57373); color: white; }
+        #significant .level-header { background: linear-gradient(to right, #8B4789, #AB47BC); color: white; }
+
         .level-header:hover {
-            background: linear-gradient(to right, var(--buas-coral), var(--buas-orange));
-            color: white;
+            opacity: 0.9;
+            transform: translateX(5px);
         }
 
         .level-header h3 {
@@ -141,7 +154,7 @@
         .level-icon {
             width: 40px;
             height: 40px;
-            background: var(--buas-orange);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -151,13 +164,12 @@
         }
 
         .level-header:hover .level-icon {
-            background: white;
-            color: var(--buas-orange);
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .collapse-icon {
             transition: transform 0.3s ease;
-            color: var(--buas-orange);
+            color: white;
         }
 
         .level-header:hover .collapse-icon {
@@ -367,7 +379,7 @@
                         </h3>
                         <i class="fas fa-chevron-down collapse-icon" id="icon-functional"></i>
                     </div>
-                    <div class="level-content collapse show" id="content-functional">
+                    <div class="level-content collapse" id="content-functional">
                         <p><strong>Definition:</strong> The product must accomplish its core purpose. This is the foundation—if your product doesn't work or fails to deliver on its basic promise, nothing else matters. Users need to be able to complete their primary tasks without the system breaking or failing.</p>
                         
                         <p><strong>Why it matters:</strong> Functionality is the bare minimum threshold for any digital product. Without it, users will abandon your product immediately, regardless of how beautiful or innovative it might be. This level addresses the most basic user need: "Does it work?"</p>
@@ -404,7 +416,7 @@
                         </h3>
                         <i class="fas fa-chevron-down collapse-icon" id="icon-reliable"></i>
                     </div>
-                    <div class="level-content collapse show" id="content-reliable">
+                    <div class="level-content collapse" id="content-reliable">
                         <p><strong>Definition:</strong> The product must work consistently and predictably over time. Users need to trust that the product will be available when they need it, that their data is secure, and that the experience will be consistent across different sessions and devices.</p>
                         
                         <p><strong>Why it matters:</strong> Reliability builds trust. Even if your product works initially, if it frequently crashes, loses data, or behaves unpredictably, users will lose confidence and seek alternatives. This level answers: "Can I depend on this?"</p>
@@ -442,7 +454,7 @@
                         </h3>
                         <i class="fas fa-chevron-down collapse-icon" id="icon-usable"></i>
                     </div>
-                    <div class="level-content collapse show" id="content-usable">
+                    <div class="level-content collapse" id="content-usable">
                         <p><strong>Definition:</strong> The product must be easy to use and intuitive to navigate. Users should be able to accomplish their goals without confusion, excessive effort, or the need for extensive training. Good usability means users can find what they need quickly and complete tasks efficiently.</p>
                         
                         <p><strong>Why it matters:</strong> Usability determines whether users will stick with your product or abandon it for a competitor. A functional and reliable product that's difficult to use will still frustrate users and lead to high abandonment rates. This level answers: "Is it easy to use?"</p>
@@ -481,7 +493,7 @@
                         </h3>
                         <i class="fas fa-chevron-down collapse-icon" id="icon-convenient"></i>
                     </div>
-                    <div class="level-content collapse show" id="content-convenient">
+                    <div class="level-content collapse" id="content-convenient">
                         <p><strong>Definition:</strong> The product goes beyond basic usability to remove friction and make tasks effortless. Convenience means anticipating user needs, reducing steps, and creating shortcuts that save time and cognitive effort. Users want to accomplish their goals with minimal hassle.</p>
                         
                         <p><strong>Why it matters:</strong> Convenience is what separates adequate products from ones users actively choose and recommend. It transforms necessary tasks into pleasant experiences. This level answers: "Does it make my life easier?"</p>
@@ -519,7 +531,7 @@
                         </h3>
                         <i class="fas fa-chevron-down collapse-icon" id="icon-enjoyable"></i>
                     </div>
-                    <div class="level-content collapse show" id="content-enjoyable">
+                    <div class="level-content collapse" id="content-enjoyable">
                         <p><strong>Definition:</strong> The product creates positive emotional responses through delightful details, personality, and aesthetic appeal. This level is about making the experience pleasant, engaging, and memorable—turning functional interactions into moments users look forward to.</p>
                         
                         <p><strong>Why it matters:</strong> Enjoyment creates emotional connection and brand loyalty. Products that delight users are more likely to be recommended, shared, and remembered. This is where good products become beloved products. This level answers: "Does it make me smile?"</p>
@@ -558,7 +570,7 @@
                         </h3>
                         <i class="fas fa-chevron-down collapse-icon" id="icon-significant"></i>
                     </div>
-                    <div class="level-content collapse show" id="content-significant">
+                    <div class="level-content collapse" id="content-significant">
                         <p><strong>Definition:</strong> The product becomes meaningful and valuable in users' lives, creating lasting impact beyond mere utility. Significant products help users become better versions of themselves, connect with their values, or achieve important personal goals. This is where products transcend function to become part of users' identity.</p>
                         
                         <p><strong>Why it matters:</strong> Significance creates the deepest form of user loyalty and advocacy. Users don't just use significant products—they identify with them, defend them, and integrate them into their life story. This level answers: "Does this make me a better person or improve my life in a meaningful way?"</p>
