@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Hierarchy of Needs - Educational Resource</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --buas-orange: #FF6B35;
+            --buas-coral: #FF8C61;
+            --buas-dark: #2C3E50;
+            --buas-light: #ECF0F1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--buas-dark);
+            line-height: 1.6;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--buas-orange) 0%, var(--buas-coral) 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .hero-section h1 {
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .disclaimer-box {
+            background-color: #FFF3E0;
+            border-left: 4px solid var(--buas-orange);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .pyramid-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .pyramid-sticky {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        @media (max-width: 991px) {
+            .pyramid-sticky {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        .pyramid-placeholder {
+            text-align: center;
+            padding: 3rem;
+            background: var(--buas-light);
+            border: 2px dashed var(--buas-orange);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .interactive-pyramid {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .pyramid-level {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            padding: 10px;
+            margin: 2px auto;
+            border-radius: 4px;
+            color: white;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .pyramid-level:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .pyramid-level.active {
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+        }
+
+        #level-significant { background: #8B4789; width: 60%; }
+        #level-enjoyable { background: #C0556B; width: 70%; }
+        #level-convenient { background: #E86A51; width: 80%; }
+        #level-usable { background: #9E9E9E; width: 90%; }
+        #level-reliable { background: #757575; width: 95%; }
+        #level-functional { background: #424242; width: 100%; }
+
+        .level-section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--buas-orange);
+        }
+
+        .level-header {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: linear-gradient(to right, var(--buas-light), white);
+            border-radius: 6px;
+            margin: -1rem -1rem 1rem -1rem;
+            transition: all 0.3s ease;
+        }
+
+        .level-header:hover {
+            background: linear-gradient(to right, var(--buas-coral), var(--buas-orange));
+            color: white;
+        }
+
+        .level-header h3 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .level-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--buas-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .level-header:hover .level-icon {
+            background: white;
+            color: var(--buas-orange);
+        }
+
+        .collapse-icon {
+            transition: transform 0.3s ease;
+            color: var(--buas-orange);
+        }
+
+        .level-header:hover .collapse-icon {
+            color: white;
+        }
+
+        .collapse-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .level-content {
+            padding-top: 1rem;
+        }
+
+        .example-box {
+            background: var(--buas-light);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        .example-good {
+            border-left: 4px solid #4CAF50;
+        }
+
+        .example-bad {
+            border-left: 4px solid #F44336;
+        }
+
+        .example-box h5 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .principles-list {
+            background: #F8F9FA;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        .principles-list ul {
+            margin-bottom: 0;
+        }
+
+        .screenshot-placeholder {
+            background: #E3F2FD;
+            border: 2px dashed #2196F3;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 6px;
+            margin: 1rem 0;
+            color: #1976D2;
+        }
+
+        .btn-download {
+            background: var(--buas-orange);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background: var(--buas-coral);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .dt-connection {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .dt-phase {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+            border-left: 3px solid white;
+        }
+
+        .footer-disclaimer {
+            background: var(--buas-light);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 3rem;
+        }
+
+        @media print {
+            .no-print { display: none; }
+            .level-content { display: block !important; }
+            body { font-size: 12pt; }
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+
+        .legend-subjective { background: #8B4789; }
+        .legend-objective { background: #424242; }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="text-center"><i class="fas fa-layer-group"></i> The UX Hierarchy of Needs</h1>
+            <p class="text-center lead">Understanding the Foundation of Great User Experience Design</p>
+            <p class="text-center mb-0">Based on Aaron Walter's "Designing for Emotion" (2011)</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Introduction -->
+        <div class="row">
+            <div class="col-12">
+                <p class="lead">The UX Hierarchy of Needs is a framework that helps designers understand and prioritize different aspects of user experience. Much like Maslow's Hierarchy of Human Needs, it suggests that foundational requirements must be met before users can appreciate higher-level features.</p>
+                
+                <div class="disclaimer-box">
+                    <strong><i class="fas fa-info-circle"></i> Important Note:</strong> While this hierarchy provides a valuable framework for thinking about UX design, remember that it's a model, not an absolute rule. Some products succeed by breaking these conventions, and user needs can vary across cultures and contexts. Use this as a guide, not a rigid checklist.
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="row">
+            <!-- Pyramid Column (Sticky on Desktop) -->
+            <div class="col-lg-4">
+                <div class="pyramid-container pyramid-sticky">
+                    <h4 class="text-center mb-3">Interactive Pyramid</h4>
+                    <p class="text-center small text-muted">Click any level to jump to details</p>
+                    
+                    <div class="interactive-pyramid">
+                        <div class="pyramid-level" id="level-significant" data-target="significant">
+                            Significant
+                        </div>
+                        <div class="pyramid-level" id="level-enjoyable" data-target="enjoyable">
+                            Enjoyable
+                        </div>
+                        <div class="pyramid-level" id="level-convenient" data-target="convenient">
+                            Convenient
+                        </div>
+                        <div class="pyramid-level" id="level-usable" data-target="usable">
+                            Usable
+                        </div>
+                        <div class="pyramid-level" id="level-reliable" data-target="reliable">
+                            Reliable
+                        </div>
+                        <div class="pyramid-level" id="level-functional" data-target="functional">
+                            Functional
+                        </div>
+                    </div>
+
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-box legend-subjective"></div>
+                            <span>Subjective</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-box legend-objective"></div>
+                            <span>Objective</span>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4 no-print">
+                        <button class="btn-download" onclick="window.print()">
+                            <i class="fas fa-download"></i> Download as PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Column -->
+            <div class="col-lg-8">
+                <!-- Level 1: Functional -->
+                <div class="level-section" id="functional">
+                    <div class="level-header" onclick="toggleLevel('functional')">
+                        <h3>
+                            <div class="level-icon"><i class="fas fa-cog"></i></div>
+                            Level 1: Functional
+                        </h3>
+                        <i class="fas fa-chevron-down collapse-icon" id="icon-functional"></i>
+                    </div>
+                    <div class="level-content collapse show" id="content-functional">
+                        <p><strong>Definition:</strong> The product must accomplish its core purpose. This is the foundation—if your product doesn't work or fails to deliver on its basic promise, nothing else matters. Users need to be able to complete their primary tasks without the system breaking or failing.</p>
+                        
+                        <p><strong>Why it matters:</strong> Functionality is the bare minimum threshold for any digital product. Without it, users will abandon your product immediately, regardless of how beautiful or innovative it might be. This level addresses the most basic user need: "Does it work?"</p>
+
+                        <div class="example-box example-good">
+                            <h5><i class="fas fa-check-circle text-success"></i> Good Example: BUas Campus App</h5>
+                            <p>A BUas campus app that successfully displays the weekly class schedule, shows room locations on an interactive map, and allows students to check their grades. All core functions work reliably when tapped.</p>
+                        </div>
+
+                        <div class="example-box example-bad">
+                            <h5><i class="fas fa-times-circle text-danger"></i> Bad Example: Food Delivery App</h5>
+                            <p>A food ordering app where the "Add to Cart" button doesn't respond, or the checkout process crashes halfway through payment. The core function—ordering food—is broken, making the app useless.</p>
+                        </div>
+
+                        <div class="principles-list">
+                            <h5><i class="fas fa-list-check"></i> Key Design Principles:</h5>
+                            <ul>
+                                <li><strong>Core feature completion:</strong> Every essential feature must work as expected</li>
+                                <li><strong>Technical stability:</strong> Minimal bugs, crashes, or broken links</li>
+                                <li><strong>Cross-browser/device compatibility:</strong> Works on all intended platforms</li>
+                                <li><strong>Basic accessibility:</strong> Can be operated by users with different abilities</li>
+                                <li><strong>Clear purpose:</strong> Users understand what the product is meant to do</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Level 2: Reliable -->
+                <div class="level-section" id="reliable">
+                    <div class="level-header" onclick="toggleLevel('reliable')">
+                        <h3>
+                            <div class="level-icon"><i class="fas fa-shield-alt"></i></div>
+                            Level 2: Reliable
+                        </h3>
+                        <i class="fas fa-chevron-down collapse-icon" id="icon-reliable"></i>
+                    </div>
+                    <div class="level-content collapse show" id="content-reliable">
+                        <p><strong>Definition:</strong> The product must work consistently and predictably over time. Users need to trust that the product will be available when they need it, that their data is secure, and that the experience will be consistent across different sessions and devices.</p>
+                        
+                        <p><strong>Why it matters:</strong> Reliability builds trust. Even if your product works initially, if it frequently crashes, loses data, or behaves unpredictably, users will lose confidence and seek alternatives. This level answers: "Can I depend on this?"</p>
+
+                        <div class="example-box example-good">
+                            <h5><i class="fas fa-check-circle text-success"></i> Good Example: Google Drive</h5>
+                            <p>Documents auto-save every few seconds, version history is preserved, and files are accessible from any device. Users trust that their work won't be lost, even if their browser crashes or internet disconnects.</p>
+                        </div>
+
+                        <div class="example-box example-bad">
+                            <h5><i class="fas fa-times-circle text-danger"></i> Bad Example: Unstable Banking App</h5>
+                            <p>A mobile banking app that frequently logs users out unexpectedly, shows incorrect account balances, or becomes unavailable during peak hours. Users can't trust it for important financial transactions.</p>
+                        </div>
+
+                        <div class="principles-list">
+                            <h5><i class="fas fa-list-check"></i> Key Design Principles:</h5>
+                            <ul>
+                                <li><strong>Uptime and availability:</strong> Minimize downtime and service interruptions</li>
+                                <li><strong>Data integrity:</strong> Information is accurate and doesn't get lost or corrupted</li>
+                                <li><strong>Consistent performance:</strong> Speed and responsiveness remain stable over time</li>
+                                <li><strong>Error handling:</strong> Graceful recovery from errors with clear communication</li>
+                                <li><strong>Security:</strong> User data and privacy are protected</li>
+                                <li><strong>Cross-device consistency:</strong> Experience remains consistent across platforms</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Level 3: Usable -->
+                <div class="level-section" id="usable">
+                    <div class="level-header" onclick="toggleLevel('usable')">
+                        <h3>
+                            <div class="level-icon"><i class="fas fa-hand-pointer"></i></div>
+                            Level 3: Usable
+                        </h3>
+                        <i class="fas fa-chevron-down collapse-icon" id="icon-usable"></i>
+                    </div>
+                    <div class="level-content collapse show" id="content-usable">
+                        <p><strong>Definition:</strong> The product must be easy to use and intuitive to navigate. Users should be able to accomplish their goals without confusion, excessive effort, or the need for extensive training. Good usability means users can find what they need quickly and complete tasks efficiently.</p>
+                        
+                        <p><strong>Why it matters:</strong> Usability determines whether users will stick with your product or abandon it for a competitor. A functional and reliable product that's difficult to use will still frustrate users and lead to high abandonment rates. This level answers: "Is it easy to use?"</p>
+
+                        <div class="example-box example-good">
+                            <h5><i class="fas fa-check-circle text-success"></i> Good Example: Spotify</h5>
+                            <p>Clear navigation with recognizable icons (Home, Search, Library), intuitive gestures for playback control, and a search function that helps users find music quickly. First-time users can start listening within seconds without instructions.</p>
+                        </div>
+
+                        <div class="example-box example-bad">
+                            <h5><i class="fas fa-times-circle text-danger"></i> Bad Example: BUas Library Catalog (hypothetical)</h5>
+                            <p>A library system with unclear search filters, books organized in a confusing categorization system, and no clear way to see if a book is available. Students spend 15 minutes trying to find one textbook.</p>
+                        </div>
+
+                        <div class="principles-list">
+                            <h5><i class="fas fa-list-check"></i> Key Design Principles:</h5>
+                            <ul>
+                                <li><strong>Intuitive navigation:</strong> Users can find what they need without getting lost</li>
+                                <li><strong>Clear information architecture:</strong> Logical organization of content</li>
+                                <li><strong>Learnability:</strong> New users can understand the interface quickly</li>
+                                <li><strong>Efficiency:</strong> Experienced users can complete tasks rapidly</li>
+                                <li><strong>Error prevention:</strong> Design prevents mistakes before they happen</li>
+                                <li><strong>Feedback:</strong> System communicates what's happening to users</li>
+                                <li><strong>Consistency:</strong> Similar elements behave in similar ways</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Level 4: Convenient -->
+                <div class="level-section" id="convenient">
+                    <div class="level-header" onclick="toggleLevel('convenient')">
+                        <h3>
+                            <div class="level-icon"><i class="fas fa-bolt"></i></div>
+                            Level 4: Convenient
+                        </h3>
+                        <i class="fas fa-chevron-down collapse-icon" id="icon-convenient"></i>
+                    </div>
+                    <div class="level-content collapse show" id="content-convenient">
+                        <p><strong>Definition:</strong> The product goes beyond basic usability to remove friction and make tasks effortless. Convenience means anticipating user needs, reducing steps, and creating shortcuts that save time and cognitive effort. Users want to accomplish their goals with minimal hassle.</p>
+                        
+                        <p><strong>Why it matters:</strong> Convenience is what separates adequate products from ones users actively choose and recommend. It transforms necessary tasks into pleasant experiences. This level answers: "Does it make my life easier?"</p>
+
+                        <div class="example-box example-good">
+                            <h5><i class="fas fa-check-circle text-success"></i> Good Example: Uber</h5>
+                            <p>Remembers your home and work addresses, suggests frequent destinations, saves payment information, and provides one-tap booking. What used to require calling a taxi company and explaining your location now takes seconds.</p>
+                        </div>
+
+                        <div class="example-box example-good">
+                            <h5><i class="fas fa-check-circle text-success"></i> Good Example: BUas Room Booking System</h5>
+                            <p>A BUas room booking system that remembers your favorite study rooms, suggests available times based on your class schedule, and sends a reminder 15 minutes before your booking—saving students from double-checking their calendar.</p>
+                        </div>
+
+                        <div class="principles-list">
+                            <h5><i class="fas fa-list-check"></i> Key Design Principles:</h5>
+                            <ul>
+                                <li><strong>Reduce cognitive load:</strong> Minimize decisions and mental effort required</li>
+                                <li><strong>Smart defaults:</strong> Pre-fill information based on context or history</li>
+                                <li><strong>Personalization:</strong> Adapt to individual user preferences and patterns</li>
+                                <li><strong>Shortcuts and automation:</strong> Let users skip repetitive steps</li>
+                                <li><strong>Contextual awareness:</strong> Anticipate needs based on time, location, or situation</li>
+                                <li><strong>Seamless integration:</strong> Connect with other tools users already use</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Level 5: Enjoyable -->
+                <div class="level-section" id="enjoyable">
+                    <div class="level-header" onclick="toggleLevel('enjoyable')">
+                        <h3>
+                            <div class="level-icon"><i class="fas fa-smile"></i></div>
+                            Level 5: Enjoyable
+                        </h3>
+                        <i class="fas fa-chevron-down collapse-icon" id="icon-enjoyable"></i>
+                    </div>
+                    <div class="level-content collapse show" id="content-enjoyable">
+                        <p><strong>Definition:</strong> The product creates positive emotional responses through delightful details, personality, and aesthetic appeal. This level is about making the experience pleasant, engaging, and memorable—turning functional interactions into moments users look forward to.</p>
+                        
+                        <p><strong>Why it matters:</strong> Enjoyment creates emotional connection and brand loyalty. Products that delight users are more likely to be recommended, shared, and remembered. This is where good products become beloved products. This level answers: "Does it make me smile?"</p>
+
+                        <div class="example-box example-good">
+                            <h5><i class="fas fa-check-circle text-success"></i> Good Example: Duolingo</h5>
+                            <p>Playful animations, encouraging messages from the owl mascot, celebratory confetti when you complete a lesson, and streak notifications that motivate continued learning. Language learning becomes fun rather than a chore.</p>
+                        </div>
+
+                        <div class="example-box example-good">
+                            <h5><i class="fas fa-check-circle text-success"></i> Good Example: Headspace</h5>
+                            <p>Beautiful minimalist animations, soothing color palettes, gentle micro-interactions, and friendly encouraging copy transform meditation practice into a calming, pleasant experience rather than feeling clinical.</p>
+                        </div>
+
+                        <div class="principles-list">
+                            <h5><i class="fas fa-list-check"></i> Key Design Principles:</h5>
+                            <ul>
+                                <li><strong>Micro-interactions:</strong> Small animated responses to user actions</li>
+                                <li><strong>Visual polish:</strong> Thoughtful aesthetics and attention to detail</li>
+                                <li><strong>Personality and voice:</strong> Distinct brand character in copy and design</li>
+                                <li><strong>Surprise and delight:</strong> Unexpected positive moments</li>
+                                <li><strong>Emotional design:</strong> Colors, typography, and imagery that evoke feeling</li>
+                                <li><strong>Playfulness:</strong> Elements of fun appropriate to the context</li>
+                                <li><strong>Celebration of success:</strong> Acknowledge user achievements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Level 6: Significant -->
+                <div class="level-section" id="significant">
+                    <div class="level-header" onclick="toggleLevel('significant')">
+                        <h3>
+                            <div class="level-icon"><i class="fas fa-star"></i></div>
+                            Level 6: Significant
+                        </h3>
+                        <i class="fas fa-chevron-down collapse-icon" id="icon-significant"></i>
+                    </div>
+                    <div class="level-content collapse show" id="content-significant">
+                        <p><strong>Definition:</strong> The product becomes meaningful and valuable in users' lives, creating lasting impact beyond mere utility. Significant products help users become better versions of themselves, connect with their values, or achieve important personal goals. This is where products transcend function to become part of users' identity.</p>
+                        
+                        <p><strong>Why it matters:</strong> Significance creates the deepest form of user loyalty and advocacy. Users don't just use significant products—they identify with them, defend them, and integrate them into their life story. This level answers: "Does this make me a better person or improve my life in a meaningful way?"</p>
+
+                        <div class="example-box example-good">
+                            <h5><i class="fas fa-check-circle text-success"></i> Good Example: Strava</h5>
+                            <p>Beyond tracking runs, Strava creates a community of athletes, celebrates personal records, visualizes long-term progress, and helps users achieve fitness goals. It becomes part of their athletic identity—users proudly say "I'm a Strava athlete."</p>
+                        </div>
+
+                        <div class="example-box example-good">
+                            <h5><i class="fas fa-check-circle text-success"></i> Good Example: Notion</h5>
+                            <p>More than a note-taking app, Notion becomes users' "second brain," helping them organize their entire life, build personal knowledge systems, and achieve productivity goals. Users share their Notion setups as expressions of their personal organization philosophy.</p>
+                        </div>
+
+                        <div class="principles-list">
+                            <h5><i class="fas fa-list-check"></i> Key Design Principles:</h5>
+                            <ul>
+                                <li><strong>Purpose alignment:</strong> Connect product use to users' deeper values</li>
+                                <li><strong>Progress visualization:</strong> Show users how far they've come</li>
+                                <li><strong>Community building:</strong> Connect users with like-minded people</li>
+                                <li><strong>Personal growth:</strong> Help users develop skills or improve themselves</li>
+                                <li><strong>Meaning-making:</strong> Help users understand or articulate their experiences</li>
+                                <li><strong>Long-term value:</strong> Benefits accumulate over time</li>
+                                <li><strong>Identity reinforcement:</strong> Product reflects who users want to be</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design Thinking Connection -->
+                <div class="dt-connection">
+                    <h3 class="text-center mb-4"><i class="fas fa-link"></i> Connection to Design Thinking Process</h3>
+                    <p class="text-center mb-4">Understanding how the UX Hierarchy of Needs maps to different phases of the Design Thinking process can help you make strategic decisions throughout your project.</p>
+                    
+                    <div class="dt-phase">
+                        <h5><i class="fas fa-heart"></i> Empathize & Define Phases → Upper Levels (Enjoyable, Significant)</h5>
+                        <p>When conducting user research and defining problems, focus on understanding deeper emotional needs and aspirations. Ask: What do users value? What makes them feel good? What would make this product meaningful in their lives? These insights inform how to design for enjoyment and significance.</p>
+                    </div>
+
+                    <div class="dt-phase">
+                        <h5><i class="fas fa-lightbulb"></i> Ideate Phase → Middle Levels (Usable, Convenient)</h5>
+                        <p>During ideation, generate solutions that address both basic usability and advanced convenience. Consider: How can we reduce friction? What shortcuts would save users time? How can we make this intuitive? Balance creativity with practical user needs.</p>
+                    </div>
+
+                    <div class="dt-phase">
+                        <h5><i class="fas fa-pencil-ruler"></i> Prototype Phase → All Levels</h5>
+                        <p>As you build prototypes, ensure foundational levels (Functional, Reliable) are solid before adding higher-level features. Test whether your prototype works, is dependable, and is usable before polishing convenience and enjoyment features.</p>
+                    </div>
+
+                    <div class="dt-phase">
+                        <h5><i class="fas fa-flask"></i> Test Phase → Lower Levels (Functional, Reliable, Usable)</h5>
+                        <p>Testing should prioritize validating the foundation. Does it work? Can users complete tasks? Is it reliable? Once these are confirmed, you can test for convenience, enjoyment, and significance. Use the hierarchy as a testing checklist.</p>
+                    </div>
+                </div>
+
+                <!-- Footer Disclaimer -->
+                <div class="footer-disclaimer">
+                    <h4><i class="fas fa-book-open"></i> Understanding the Model's Limitations</h4>
+                    <p>While the UX Hierarchy of Needs provides an excellent framework for thinking systematically about user experience, it's important to recognize its limitations:</p>
+                    <ul>
+                        <li><strong>Not always sequential:</strong> Some products succeed by excelling at higher levels despite weaknesses at lower levels (e.g., early Twitter was buggy but delightful)</li>
+                        <li><strong>Context dependent:</strong> Different user groups and cultures may prioritize levels differently</li>
+                        <li><strong>Overlapping needs:</strong> In reality, users often evaluate multiple levels simultaneously rather than sequentially</li>
+                        <li><strong>Evolution over time:</strong> What was considered "enjoyable" in 2011 may be baseline "usable" today as user expectations evolve</li>
+                    </ul>
+                    <p class="mb-0"><strong>Bottom line:</strong> Use this hierarchy as a thinking tool and communication framework, not a rigid formula. Great design requires understanding your specific users, context, and goals.</p>
+                </div>
+
+                <!-- Further Reading -->
+                <div class="mt-4">
+                    <h4><i class="fas fa-graduation-cap"></i> Further Reading</h4>
+                    <ul>
+                        <li>Walter, A. (2011). <em>Designing for Emotion</em>. A Book Apart.</li>
+                        <li><a href="https://www.nngroup.com/articles/theory-user-delight/" target="_blank">Nielsen Norman Group: A Theory of User Delight</a></li>
+                        <li><a href="https://www.interaction-design.org/literature/topics/hierarchy-of-needs" target="_blank">Interaction Design Foundation: Hierarchy of Needs</a></li>
+                        <li>Norman, D. (2013). <em>The Design of Everyday Things</em>. MIT Press.</li>
+                    </ul>
+                </div>
+
+                <div class="text-center mt-5 mb-4">
+                    <p class="text-muted"><small>Educational resource for UX/UI design learning | Last updated: December 2025</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleLevel(levelId) {
+            const content = document.getElementById('content-' + levelId);
+            const icon = document.getElementById('icon-' + levelId);
+            const bsCollapse = new bootstrap.Collapse(content, {
+                toggle: true
+            });
+            icon.classList.toggle('rotated');
+        }
+
+        // Pyramid click navigation
+        document.querySelectorAll('.pyramid-level').forEach(level => {
+            level.addEventListener('click', function() {
+                const target = this.dataset.target;
+                const section = document.getElementById(target);
+                const content = document.getElementById('content-' + target);
+                
+                // Scroll to section
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Expand if collapsed
+                if (!content.classList.contains('show')) {
+                    const bsCollapse = new bootstrap.Collapse(content, { toggle: true });
+                    const icon = document.getElementById('icon-' + target);
+                    icon.classList.add('rotated');
+                }
+                
+                // Visual feedback
+                document.querySelectorAll('.pyramid-level').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Intersection Observer for active pyramid highlighting
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '-20% 0px -20% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    document.querySelectorAll('.pyramid-level').forEach(l => l.classList.remove('active'));
+                    document.getElementById('level-' + id)?.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.level-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
